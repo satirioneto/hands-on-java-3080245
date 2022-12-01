@@ -3,6 +3,8 @@ package bank;
 import java.util.Scanner;
 
 import javax.security.auth.login.LoginException;
+
+import bank.exceptions.AmountException;
 // Class [Menu]
 public class Menu {
   // private variable [Scanner] calls [scanner]
@@ -67,13 +69,23 @@ public class Menu {
         case 1:
         System.out.println("How much would you like to deposit?");
         amount = scanner.nextDouble();
-        account.deposit(amount);
+        try{
+          account.deposit(amount);
+        }catch(AmountException e){
+          System.out.println(e.getMessage());
+          System.out.println("Please try again.");
+        }  
         break;
 
         case 2:
         System.out.println("How much would you like to withdraw?");
         amount = scanner.nextDouble();
-        account.withdraw(amount);
+        try{
+          account.withdraw(amount);
+        }catch(AmountException e){
+           System.out.println(e.getMessage());
+           System.out.println("Please try again.");
+        }
         break;
 
         case 3:
@@ -91,7 +103,6 @@ public class Menu {
 
 
       }
-
     }
   }
 }
